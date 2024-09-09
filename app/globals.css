@@ -2,38 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Estilos globais */
 body {
   @apply bg-gray-100 text-gray-900;
   font-family: 'Geist Sans', sans-serif;
 }
 
-/* Modo escuro com Tailwind */
 body.dark {
   @apply bg-gray-900 text-gray-100;
 }
 
-/* Estilo do cabeçalho */
 header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Transições suaves */
 button {
   @apply transition-colors duration-300;
 }
 
-/* Estilo da barra lateral */
 nav {
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo dos itens da barra lateral */
 nav ul li {
   @apply transition-colors duration-300;
 }
 
-/* Hover effect */
 nav ul li:hover {
-  background-color: #1a1a1a;
+  background-color: #cecece;
 }
