@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>('');
   const router = useRouter();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (email === 'admin@admin.com' && password === 'password') {
