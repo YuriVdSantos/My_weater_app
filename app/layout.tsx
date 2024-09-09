@@ -1,92 +1,54 @@
-'use client';
+// app/layout.tsx
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import './globals.css';
+import dynamic from 'next/dynamic';
 
-import { useState } from 'react';
-import PrivateRoute from './components/PrivateRoute';
+// Importação dinâmica dos componentes com ssr: false para evitar a renderização no lado do servidor
+const ThemeToggle = dynamic(() => import('./components/ThemeToggle'), { ssr: false });
+const Sidebar = dynamic(() => import('./components/Sidebar'), { ssr: false });
 
-// Defina interfaces para os dados que você espera da API
-interface Weather {
-  description: string;
-}
+// Definição das fontes locais com variáveis CSS
+const geistSans = localFont({
+  src: './fonts/GeistVF.woff',
+  variable: '--font-geist-sans',
+  weight: '100 900',
+});
 
-interface Main {
-  temp: number;
-}
+const geistMono = localFont({
+  src: './fonts/GeistMonoVF.woff',
+  variable: '--font-geist-mono',
+  weight: '100 900',
+});
 
-interface WeatherData {
-  name: string;
-  weather: Weather[];
-  main: Main;
-}
-
-const HomePage = () => {
-  const [city, setCity] = useState('');
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [error, setError] = useState('');
-
-  const fetchWeather = async () => {
-    const apiKey = '69125c609e5cab6c35bacd52b0ceb95b'; // Substitua com sua API key do OpenWeatherMap
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-      );
-      if (!response.ok) {
-        throw new Error('Cidade não encontrada');
-      }
-      const data = await response.json();
-      setWeatherData(data);
-      setError('');
-    } catch (err) {
-      // Defina o tipo do erro como Error para garantir que a mensagem seja acessível
-      setError((err as Error).message);
-      setWeatherData(null);
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    fetchWeather();
-  };
-
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-700 p-4">
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-md w-full mx-auto">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-6 text-center dark:text-white">
-          Previsão do Tempo
-        </h1>
-        <form onSubmit={handleSubmit} className="mb-6">
-          <input
-            type="text"
-            placeholder="Digite a cidade"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 dark:text-white"
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
-          >
-            Buscar
-          </button>
-        </form>
-
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-
-        {weatherData && (
-          <div className="text-center dark:text-white">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">{weatherData.name}</h2>
-            <p className="capitalize mb-2">{weatherData.weather[0].description}</p>
-            <p className="text-lg sm:text-xl md:text-2xl font-semibold">{weatherData.main.temp}°C</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+// Metadados da aplicação
+export const metadata: Metadata = {
+  title: 'My Weather App',
+  description: 'Weather forecasting application',
 };
 
-export default function Home() {
+// Layout principal da aplicação
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <PrivateRoute>
-      <HomePage />
-    </PrivateRoute>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="flex">
+          <Sidebar />
+          <div className="flex-1">
+            <header className="p-4 bg-gray-800 text-white flex justify-between items-center">
+              <h1 className="text-xl font-bold">My Weather App</h1>
+              <ThemeToggle />
+            </header>
+            <main className="p-4">
+              {children}
+            </main>
+          </div>
+        </div>
+      </body>
+    </html>
   );
 }
