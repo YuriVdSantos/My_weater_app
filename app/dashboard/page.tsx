@@ -1,8 +1,7 @@
 'use client';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import PrivateRoute from '../components/PrivateRoute';
 
