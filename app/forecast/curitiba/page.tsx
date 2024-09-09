@@ -9,11 +9,26 @@ import { usePathname } from 'next/navigation';
 // Registro do Chart.js
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement);
 
+// Tipos para a resposta da API
+interface WeatherData {
+  dt_txt: string;
+  main: {
+    temp: number;
+  };
+  weather: {
+    description: string;
+  }[];
+}
+
+interface ForecastResponse {
+  list: WeatherData[];
+}
+
 const ForecastPage = () => {
   const pathname = usePathname(); // Obtenha o pathname atual
   const cityName = pathname?.split('/')[2]; // Extraia o cityName da URL
 
-  const [forecastData, setForecastData] = useState<any>(null);
+  const [forecastData, setForecastData] = useState<ForecastResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -33,7 +48,7 @@ const ForecastPage = () => {
             throw new Error('Cidade não encontrada');
           }
 
-          const data = await res.json();
+          const data: ForecastResponse = await res.json();
           setForecastData(data);
         } catch (err) {
           setError((err as Error).message);
@@ -50,8 +65,8 @@ const ForecastPage = () => {
   const getChartData = () => {
     if (!forecastData) return { labels: [], datasets: [] };
 
-    const labels = forecastData.list.map((item: any) => item.dt_txt);
-    const values = forecastData.list.map((item: any) => item.main.temp);
+    const labels = forecastData.list.map((item) => item.dt_txt);
+    const values = forecastData.list.map((item) => item.main.temp);
 
     return {
       labels,
@@ -80,7 +95,7 @@ const ForecastPage = () => {
           <div className="space-y-6">
             <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 md:p-6">
               <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Previsão para os próximos 5 dias:</h2>
-              {forecastData.list.map((item: any, index: number) => (
+              {forecastData.list.map((item, index) => (
                 <div key={index} className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                   <p className="text-gray-800 dark:text-white">Data: {item.dt_txt}</p>
                   <p className="text-gray-800 dark:text-white">Temperatura: {item.main.temp} °C</p>
