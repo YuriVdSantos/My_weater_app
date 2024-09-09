@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import PrivateRoute from '../components/PrivateRoute';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import PrivateRoute from '../components/PrivateRoute';
 
 // Defina a interface para os dados
 interface WeatherData {
@@ -53,7 +54,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 md:p-8 max-w-lg w-full">
         <h1 className="text-2xl font-semibold text-center mb-6 text-gray-900 dark:text-gray-100">
           Previsão do Tempo
@@ -64,11 +65,11 @@ const DashboardPage = () => {
             value={city}
             onChange={(e) => setCity(e.target.value)}
             placeholder="Digite o nome da cidade"
-            className="w-full p-3 border rounded mb-4 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
           >
             Buscar Previsão
           </button>
@@ -93,21 +94,21 @@ const DashboardPage = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-              <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded shadow">
+              <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
                 <p className="text-sm">Temperatura mínima:</p>
-                <p className="text-xl">{weatherData.main.temp_min}°C</p>
+                <p className="text-xl font-semibold">{weatherData.main.temp_min}°C</p>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded shadow">
+              <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
                 <p className="text-sm">Temperatura máxima:</p>
-                <p className="text-xl">{weatherData.main.temp_max}°C</p>
+                <p className="text-xl font-semibold">{weatherData.main.temp_max}°C</p>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded shadow">
+              <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
                 <p className="text-sm">Umidade:</p>
-                <p className="text-xl">{weatherData.main.humidity}%</p>
+                <p className="text-xl font-semibold">{weatherData.main.humidity}%</p>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded shadow">
+              <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
                 <p className="text-sm">Velocidade do vento:</p>
-                <p className="text-xl">{weatherData.wind.speed} m/s</p>
+                <p className="text-xl font-semibold">{weatherData.wind.speed} m/s</p>
               </div>
             </div>
           </div>

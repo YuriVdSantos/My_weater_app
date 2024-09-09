@@ -47,8 +47,8 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-700 p-4">
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-md w-full mx-auto">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 md:p-8 max-w-md w-full mx-auto">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-6 text-center dark:text-white">
           Previsão do Tempo
         </h1>
@@ -58,11 +58,11 @@ const HomePage = () => {
             placeholder="Digite a cidade"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 dark:text-white"
+            className="w-full p-3 border border-gray-300 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 transition-colors"
           >
             Buscar
           </button>
