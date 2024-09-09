@@ -2,26 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Estilos globais */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-gray-100 text-gray-900;
+  font-family: 'Geist Sans', sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Modo escuro com Tailwind */
+body.dark {
+  @apply bg-gray-900 text-gray-100;
+}
+
+/* Estilo do cabeçalho */
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Transições suaves */
+button {
+  @apply transition-colors duration-300;
+}
+
+/* Estilo da barra lateral */
+nav {
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo dos itens da barra lateral */
+nav ul li {
+  @apply transition-colors duration-300;
+}
+
+/* Hover effect */
+nav ul li:hover {
+  background-color: #1a1a1a;
 }
