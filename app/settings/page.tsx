@@ -1,5 +1,4 @@
-// app/settings/page.tsx
-'use client'; // Adiciona o 'use client' para garantir que seja um Client Component
+'use client';
 
 import { useState } from 'react';
 import PrivateRoute from '../components/PrivateRoute'; // Ajuste o caminho se necessário
@@ -19,11 +18,11 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-700">
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-lg w-full">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-700 p-4">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-lg w-full sm:max-w-md">
         <h1 className="text-2xl font-bold text-center mb-6 dark:text-white">Configurações</h1>
         <div className="mb-6">
-          <label className="block text-gray-700 dark:text-gray-300 mb-2">Unidade de Temperatura</label>
+          <label className="block text-gray-700 dark:text-gray-300 mb-2 text-sm sm:text-base">Unidade de Temperatura</label>
           <select
             value={temperatureUnit}
             onChange={handleTemperatureChange}
@@ -34,7 +33,7 @@ const SettingsPage = () => {
           </select>
         </div>
         <div className="mb-6">
-          <label className="inline-flex items-center">
+          <label className="inline-flex items-center text-sm sm:text-base">
             <input
               type="checkbox"
               checked={notificationsEnabled}

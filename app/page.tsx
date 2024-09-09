@@ -48,9 +48,9 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-700">
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-md w-full">
-        <h1 className="text-4xl font-bold text-blue-600 mb-6 text-center dark:text-white">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-700 p-4">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-md w-full mx-auto">
+        <h1 className="text-3xl md:text-4xl font-bold text-blue-600 mb-6 text-center dark:text-white">
           Previsão do Tempo
         </h1>
         <form onSubmit={handleSubmit} className="mb-6">
@@ -73,9 +73,9 @@ const HomePage = () => {
 
         {weatherData && (
           <div className="text-center dark:text-white">
-            <h2 className="text-2xl font-semibold mb-2">{weatherData.name}</h2>
+            <h2 className="text-xl md:text-2xl font-semibold mb-2">{weatherData.name}</h2>
             <p className="capitalize mb-2">{weatherData.weather[0].description}</p>
-            <p className="text-lg font-semibold">{weatherData.main.temp}°C</p>
+            <p className="text-lg md:text-xl font-semibold">{weatherData.main.temp}°C</p>
           </div>
         )}
       </div>
