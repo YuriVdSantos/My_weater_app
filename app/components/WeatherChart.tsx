@@ -1,11 +1,27 @@
-"use client"
+// app/components/WeatherChart.tsx
+"use client";
 
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale } from 'chart.js';
+import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, ChartOptions } from 'chart.js';
 
+// Registre os componentes necessários do ChartJS
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale);
 
-const WeatherChart = ({ data }: { data: { labels: string[]; values: number[] } }) => {
+// Defina uma interface para os dados do gráfico
+interface WeatherChartData {
+  labels: string[];
+  values: number[];
+}
+
+// Defina a interface para as propriedades do componente
+interface WeatherChartProps {
+  data: WeatherChartData;
+  options?: ChartOptions<'line'>;
+}
+
+// Componente WeatherChart
+const WeatherChart = ({ data, options }: WeatherChartProps) => {
+  // Prepare os dados para o gráfico
   const chartData = {
     labels: data.labels,
     datasets: [
@@ -19,7 +35,8 @@ const WeatherChart = ({ data }: { data: { labels: string[]; values: number[] } }
     ],
   };
 
-  return <Line data={chartData} />;
+  // Retorne o componente Line do ChartJS com os dados e opções
+  return <Line data={chartData} options={options} />;
 };
 
 export default WeatherChart;

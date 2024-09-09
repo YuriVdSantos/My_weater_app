@@ -11,30 +11,38 @@ const Sidebar = () => {
       </div>
       <ul className="flex flex-col mt-6">
         {/* Link para Home */}
-        <li className="p-4 hover:bg-gray-700 cursor-pointer flex items-center">
-          <Link href="/" className="flex items-center">
-            <FaHome className="mr-3" /> <span>Home</span>
+        <li className="p-4 hover:bg-gray-700">
+          <Link href="/" legacyBehavior>
+            <a className="flex items-center">
+              <FaHome className="mr-3" /> <span>Home</span>
+            </a>
           </Link>
         </li>
 
         {/* Link para Search */}
-        <li className="p-4 hover:bg-gray-700 cursor-pointer flex items-center">
-          <Link href="/search" className="flex items-center">
-            <FaSearch className="mr-3" /> <span>Search</span>
+        <li className="p-4 hover:bg-gray-700">
+          <Link href="/search" legacyBehavior>
+            <a className="flex items-center">
+              <FaSearch className="mr-3" /> <span>Search</span>
+            </a>
           </Link>
         </li>
 
         {/* Link para Favorites */}
-        <li className="p-4 hover:bg-gray-700 cursor-pointer flex items-center">
-          <Link href="/favorites" className="flex items-center">
-            <FaHeart className="mr-3" /> <span>Favorites</span>
+        <li className="p-4 hover:bg-gray-700">
+          <Link href="/favorites" legacyBehavior>
+            <a className="flex items-center">
+              <FaHeart className="mr-3" /> <span>Favorites</span>
+            </a>
           </Link>
         </li>
 
         {/* Link para Settings */}
-        <li className="p-4 hover:bg-gray-700 cursor-pointer flex items-center">
-          <Link href="/settings" className="flex items-center">
-            <FaCog className="mr-3" /> <span>Settings</span>
+        <li className="p-4 hover:bg-gray-700">
+          <Link href="/settings" legacyBehavior>
+            <a className="flex items-center">
+              <FaCog className="mr-3" /> <span>Settings</span>
+            </a>
           </Link>
         </li>
       </ul>

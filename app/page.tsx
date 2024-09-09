@@ -1,10 +1,26 @@
 'use client';
+
 import { useState } from 'react';
 import PrivateRoute from './components/PrivateRoute';
 
+// Defina interfaces para os dados que você espera da API
+interface Weather {
+  description: string;
+}
+
+interface Main {
+  temp: number;
+}
+
+interface WeatherData {
+  name: string;
+  weather: Weather[];
+  main: Main;
+}
+
 const HomePage = () => {
   const [city, setCity] = useState('');
-  const [weatherData, setWeatherData] = useState<any>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState('');
 
   const fetchWeather = async () => {
@@ -19,8 +35,9 @@ const HomePage = () => {
       const data = await response.json();
       setWeatherData(data);
       setError('');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      // Defina o tipo do erro como Error para garantir que a mensagem seja acessível
+      setError((err as Error).message);
       setWeatherData(null);
     }
   };
@@ -54,7 +71,7 @@ const HomePage = () => {
 
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-        {weatherData && weatherData.weather && weatherData.main && (
+        {weatherData && (
           <div className="text-center dark:text-white">
             <h2 className="text-2xl font-semibold mb-2">{weatherData.name}</h2>
             <p className="capitalize mb-2">{weatherData.weather[0].description}</p>

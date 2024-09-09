@@ -5,15 +5,17 @@ import { useState } from 'react';
 import PrivateRoute from '../components/PrivateRoute'; // Ajuste o caminho se necessário
 
 const SettingsPage = () => {
-  const [temperatureUnit, setTemperatureUnit] = useState('Celsius');
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  // Tipos de estado
+  const [temperatureUnit, setTemperatureUnit] = useState<'Celsius' | 'Fahrenheit'>('Celsius');
+  const [notificationsEnabled, setNotificationsEnabled] = useState<boolean>(true);
 
+  // Manipuladores de eventos
   const handleTemperatureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTemperatureUnit(e.target.value);
+    setTemperatureUnit(e.target.value as 'Celsius' | 'Fahrenheit');
   };
 
   const handleNotificationsChange = () => {
-    setNotificationsEnabled(!notificationsEnabled);
+    setNotificationsEnabled(prevState => !prevState);
   };
 
   return (

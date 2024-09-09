@@ -1,18 +1,31 @@
 'use client';
-import { useState } from 'react'; 
-import PrivateRoute from '../components/PrivateRoute'; 
+import { useState } from 'react';
+import PrivateRoute from '../components/PrivateRoute';
+import Image from 'next/image';
+
+// Defina a interface para os dados
+interface WeatherData {
+  weather: Array<{ icon: string; description: string }>;
+  main: {
+    temp: number;
+    temp_min: number;
+    temp_max: number;
+    humidity: number;
+  };
+  wind: { speed: number };
+}
 
 const DashboardPage = () => {
-  const [city, setCity] = useState(''); 
-  const [weatherData, setWeatherData] = useState<any>(null); 
+  const [city, setCity] = useState('');
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const API_KEY = '69125c609e5cab6c35bacd52b0ceb95b'; 
+  const API_KEY = '69125c609e5cab6c35bacd52b0ceb95b';
 
   const fetchWeather = async () => {
-    setLoading(true); 
-    setError(''); 
+    setLoading(true);
+    setError('');
 
     try {
       const res = await fetch(
@@ -23,25 +36,27 @@ const DashboardPage = () => {
       }
 
       const data = await res.json();
-      setWeatherData(data); 
+      setWeatherData(data);
     } catch (err) {
       setError((err as Error).message);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (city) {
-      fetchWeather(); 
+      fetchWeather();
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-lg w-full">
-        <h1 className="text-2xl font-semibold text-center mb-6 text-gray-900 dark:text-gray-100">Previsão do Tempo</h1>
+        <h1 className="text-2xl font-semibold text-center mb-6 text-gray-900 dark:text-gray-100">
+          Previsão do Tempo
+        </h1>
         <form onSubmit={handleSubmit} className="mb-4">
           <input
             type="text"
@@ -64,17 +79,18 @@ const DashboardPage = () => {
           <div className="text-gray-900 dark:text-gray-100">
             <h2 className="text-lg font-semibold mb-4">Previsão do tempo para {city}</h2>
             <div className="flex items-center justify-center">
-              <img
+              <Image
                 src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
                 alt="Ícone do clima"
-                className="w-20 h-20"
+                width={80}
+                height={80}
               />
               <div className="ml-4">
                 <p className="text-4xl font-bold">{weatherData.main.temp}°C</p>
                 <p className="text-sm capitalize">{weatherData.weather[0].description}</p>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-4 mt-6">
               <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded shadow">
                 <p className="text-sm">Temperatura mínima:</p>
@@ -112,4 +128,4 @@ export default function Dashboard() {
       <DashboardPage />
     </PrivateRoute>
   );
-};
+}

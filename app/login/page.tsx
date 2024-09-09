@@ -1,16 +1,14 @@
-'use client';
-import { useState } from 'react';
+import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    // Simulação de autenticação para redirecionar diferentes usuários
     if (email === 'admin@admin.com' && password === 'password') {
       localStorage.setItem('loggedIn', 'true');
       router.push('/dashboard'); // Redireciona o admin para o dashboard

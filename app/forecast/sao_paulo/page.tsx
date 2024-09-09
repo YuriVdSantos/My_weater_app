@@ -4,9 +4,20 @@ import { useRouter } from 'next/navigation'; // Atualize para usar `next/navigat
 import { useEffect, useState } from 'react';
 import PrivateRoute from '../../components/PrivateRoute'; // Ajuste o caminho se necessário
 
+// Defina uma interface para os dados da previsão
+interface ForecastItem {
+  dt_txt: string;
+  main: { temp: number };
+  weather: Array<{ description: string }>;
+}
+
+interface ForecastData {
+  list: ForecastItem[];
+}
+
 const ForecastPage = () => {
   const router = useRouter();
-  const [forecastData, setForecastData] = useState<any>(null);
+  const [forecastData, setForecastData] = useState<ForecastData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -51,7 +62,7 @@ const ForecastPage = () => {
       {error && <p className="text-red-500 text-center">{error}</p>}
       {forecastData && (
         <div>
-          {forecastData.list.map((item: any, index: number) => (
+          {forecastData.list.map((item, index) => (
             <div key={index} className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
               <p>Data: {item.dt_txt}</p>
               <p>Temperatura: {item.main.temp} °C</p>

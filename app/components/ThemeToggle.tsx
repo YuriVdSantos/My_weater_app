@@ -2,12 +2,14 @@
 import { useEffect, useState } from 'react';
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState(
+  // Define o estado inicial do tema
+  const [theme, setTheme] = useState<'light' | 'dark'>(
     typeof window !== 'undefined' && localStorage.getItem('theme') === 'dark'
       ? 'dark'
       : 'light'
   );
 
+  // Efeito para adicionar ou remover a classe de tema e atualizar o localStorage
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -18,16 +20,18 @@ const ThemeToggle = () => {
     }
   }, [theme]);
 
+  // Função para alternar o tema
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
   };
 
   return (
     <button
       onClick={toggleTheme}
       className="p-2 bg-gray-300 dark:bg-gray-700 rounded"
+      aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     >
-      {theme === 'dark' ? 'Trocar para Modo Claro' : 'Trocar para Modo Escuro'}
+      {theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     </button>
   );
 };
