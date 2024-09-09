@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   return (
     <div className="relative">
-      {/* Botão de menu hambúrguer para telas pequenas */}
+      
       <button
         onClick={toggleMenu}
         className="md:hidden p-4 text-gray-800 dark:text-white"
@@ -22,7 +22,6 @@ const Sidebar = () => {
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
 
-      {/* Sidebar */}
       <nav
         className={`fixed top-0 left-0 h-screen w-64 bg-blue-100 dark:bg-gray-900 dark:text-white md:static md:w-full md:flex md:flex-col md:h-auto md:bg-transparent md:text-gray-800 md:border-none ${isOpen ? 'block' : 'hidden md:block'}`}
       >
