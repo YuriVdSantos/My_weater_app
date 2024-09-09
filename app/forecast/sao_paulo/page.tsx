@@ -1,12 +1,13 @@
+// app/forecast/sao_paulo/page.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation'; // Importa useSearchParams da next/navigation
+import { useSearchParams } from 'next/navigation'; // Atualizado para usar useSearchParams
 import PrivateRoute from '../../components/PrivateRoute'; // Ajuste o caminho se necessário
 
 const ForecastPage = () => {
-  const searchParams = useSearchParams(); // Usa useSearchParams para acessar os parâmetros de consulta
-  const cityName = searchParams.get('cityName') as string;
+  const searchParams = useSearchParams(); // Use useSearchParams para acessar os parâmetros de consulta
+  const cityName = searchParams.get('cityName'); // Obtém o parâmetro cityName da URL
   const [forecastData, setForecastData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
